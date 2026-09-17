@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { GitHubIcon } from "@/components/brand-icons";
 import { projectCaseStudies, projects } from "@/data/projects";
 import { ProjectPreview } from "@/components/project-preview";
 
@@ -22,9 +21,6 @@ export default function ProjectPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue-700 px-4 py-2.5 text-sm font-medium text-white">
             <ExternalLink size={15} /> Live Site
-          </a>
-          <a href={project.sourceUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-900">
-            <GitHubIcon size={16} /> GitHub Repository
           </a>
         </div>
 

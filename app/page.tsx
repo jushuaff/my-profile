@@ -72,9 +72,6 @@ export default function Home() {
                     <a href={project.liveUrl} target="_blank" rel="noreferrer" className="rounded-full bg-blue-700 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800">
                       Live Website
                     </a>
-                    <a href={project.sourceUrl} target="_blank" rel="noreferrer" className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-900 transition hover:border-blue-500 hover:text-blue-700">
-                      Source Code
-                    </a>
                     <Link href={`/projects/${project.slug}`} className="rounded-full border border-slate-200 bg-transparent px-4 py-2.5 text-sm font-medium text-slate-900 transition hover:border-blue-500 hover:text-blue-700">
                       View Case Study
                     </Link>
