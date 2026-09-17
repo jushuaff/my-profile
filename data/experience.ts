@@ -1,6 +1,16 @@
 // Dates are omitted where none were supplied; order does not imply current employment.
 export const experience = [
   {
+    "company": "YouNeedWorkNow",
+    "role": "Freelance Web Developer",
+    "period": null,
+    "summary": "Updated and rebuilt the client's website with a modernized design and additional functionality.",
+    "responsibilities": [
+      "Updated the existing WordPress website.",
+      "Rebuilt the website using Laravel 11, modernizing the design and adding new functionality."
+    ]
+  },
+  {
     "company": "Japan Livline",
     "role": "Full-Stack Developer",
     "period": null,
@@ -49,6 +59,20 @@ export const experience = [
 ] as const;
 
 export const contributions = [
+  {
+    "company": "YouNeedWorkNow",
+    "summary": "Freelance website updates and a Laravel 11 rebuild.",
+    "projects": [
+      {
+        "name": "WordPress website updates",
+        "detail": "Updated the existing WordPress website."
+      },
+      {
+        "name": "Laravel 11 website rebuild",
+        "detail": "Rebuilt the website using Laravel 11 with a modernized design and additional functionality."
+      }
+    ]
+  },
   {
     "company": "Japan Livline",
     "summary": "Feature development and maintenance across Laravel and CodeIgniter applications.",
