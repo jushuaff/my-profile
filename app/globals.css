@@ -26,7 +26,7 @@ img { max-width: 100%; display: block; }
 button, input, select, textarea { font: inherit; }
 button, summary { cursor: pointer; }
 :focus-visible { outline: 2px solid #1d4ed8; outline-offset: 5px; }
-input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offset: 2px; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 2px; }
 .section-shell { width: min(1280px, 100%); padding: 88px 32px; margin-inline: auto; }
 .eyebrow { color: #1d4ed8; text-transform: uppercase; letter-spacing: .17em; font-size: 11px; font-weight: 650; }
 .btn-primary, .btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 20px; min-height: 46px; border-radius: 9px; font-size: 13px; font-weight: 600; border: 1px solid transparent; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
@@ -84,7 +84,123 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline-offs
   .project-preview-fallback { gap: 8px; padding: 16px; }
   .project-preview-fallback p:last-child { display: none; }
 }
+/* Decorative effects stay local to the portfolio homepage. */
+.portfolio-effects .portfolio-hero {
+  position: relative;
+  isolation: isolate;
+}
+.portfolio-effects .portfolio-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 85% 35%, #dbeafe 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 70%, #eff6ff 0%, transparent 50%);
+}
+.portfolio-effects :is(.effect-card, .skill-card, .profile-card) {
+  transition: translate .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.portfolio-effects :is(.btn-primary, .btn-secondary) svg {
+  transition: translate .2s ease;
+}
+.portfolio-effects .effect-card:focus-within {
+  border-color: #93b4f5;
+  box-shadow: 0 12px 32px -16px rgb(29 78 216 / .22);
+}
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-effects :is(.effect-card, .skill-card, .profile-card):hover {
+    border-color: #93b4f5;
+    box-shadow: 0 18px 40px -20px rgb(29 78 216 / .25);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .portfolio-effects .portfolio-hero > div > :first-child > * {
+    animation: portfolio-enter .65s ease-out both;
+  }
+  .portfolio-effects .portfolio-hero h1 { animation-delay: .06s; }
+  .portfolio-effects .portfolio-hero h1 + p { animation-delay: .12s; }
+  .portfolio-effects .portfolio-hero h1 + p + div { animation-delay: .18s; }
+  .portfolio-effects .portfolio-hero .profile-card {
+    animation: portfolio-enter .8s .15s ease-out both;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .portfolio-effects :is(.effect-card, .skill-card, .profile-card):hover { translate: 0 -5px; }
+    .portfolio-effects :is(.btn-primary, .btn-secondary):hover { transform: translateY(-2px); }
+    .portfolio-effects :is(.btn-primary, .btn-secondary):hover svg { translate: 3px 0; }
+  }
+}
+@keyframes portfolio-enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Visitor preferences supplement the accessible defaults and OS settings. */
+html[data-large-text] { font-size: 125%; }
+html[data-underline-links] a { text-decoration: underline; text-underline-offset: .2em; }
+html[data-high-contrast] :is([class*="text-slate-"], .skill-list) { color: #0f172a; }
+html[data-high-contrast] :is([class*="text-blue-"], .eyebrow, .profile-card-link) { color: #1e3a8a; }
+html[data-high-contrast] :is([class*="border-slate-"], .effect-card, .skill-card, .profile-card, input, select, textarea) { border-color: #64748b; }
+html[data-reduce-motion], html[data-reduce-motion] *, html[data-reduce-motion] *::before, html[data-reduce-motion] *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html[data-reduce-motion] .portfolio-effects :is(.effect-card, .skill-card, .profile-card, .btn-primary, .btn-secondary, .btn-primary svg, .btn-secondary svg) {
+  transform: none !important;
+  translate: none !important;
+}
+html[data-reading-space] main :is(p, li) { line-height: 2; letter-spacing: .025em; word-spacing: .08em; }
+
+/* Change actual interface colors, without filtering the page or its fixed elements. */
+html[data-color-mode] {
+  --color-emerald-800: #153e75;
+  --color-red-800: #713f12;
+  --color-red-500: #a16207;
+}
+html[data-color-mode="grayscale"] {
+  --color-blue-50: #f5f5f5;
+  --color-blue-100: #e5e5e5;
+  --color-blue-500: #525252;
+  --color-blue-600: #404040;
+  --color-blue-700: #333333;
+  --color-blue-800: #262626;
+  --color-blue-900: #171717;
+  --color-slate-50: #fafafa;
+  --color-slate-100: #f5f5f5;
+  --color-slate-200: #dedede;
+  --color-slate-300: #bfbfbf;
+  --color-slate-400: #737373;
+  --color-slate-500: #626262;
+  --color-slate-600: #525252;
+  --color-slate-700: #404040;
+  --color-slate-800: #262626;
+  --color-slate-900: #171717;
+  --color-emerald-800: #262626;
+  --color-red-800: #262626;
+  --color-red-500: #525252;
+}
+html[data-color-mode="grayscale"] body { color: #171717; }
+html[data-color-mode="grayscale"] :is(.eyebrow, .profile-card-link, .project-preview-fallback, .experience-marker, .skill-list, .btn-secondary, .skip-link) { color: #262626; }
+html[data-color-mode="grayscale"] :is(.profile-card, .project-preview, .experience-marker, .btn-secondary) { background: #f5f5f5; border-color: #737373; }
+html[data-color-mode="grayscale"] .btn-primary { background: #333; border-color: #333; color: white; }
+html[data-color-mode="grayscale"] .btn-primary:hover { background: #171717; }
+html[data-color-mode="grayscale"] :is(.btn-secondary:hover, .profile-card-link:hover) { color: #171717; border-color: #525252; }
+html[data-color-mode="grayscale"] .portfolio-hero::before { background: radial-gradient(ellipse at 85% 35%, #e5e5e5, transparent 55%); }
+html[data-color-mode="grayscale"] :is(img, svg) { filter: grayscale(1); }
+html[data-color-mode="grayscale"] :is(.effect-card, .skill-card, .profile-card):is(:hover, :focus-within) { border-color: #525252; box-shadow: 0 12px 32px -16px rgb(0 0 0 / .25); }
+html[data-color-mode="grayscale"] :is(.skill-card, .skill-list li, .experience-timeline, .experience-item, .profile-card-link, .skip-link) { border-color: #737373; }
+html[data-color-mode="grayscale"] .contribution-group[open] summary { background: #fafafa; }
+html[data-color-mode="grayscale"] :is(:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible) { outline-color: #171717; }
+html[data-color-mode="grayscale"][data-high-contrast] :is([class*="text-slate-"], [class*="text-blue-"], .eyebrow, .profile-card-link, .skill-list) { color: #171717; }
+html[data-color-mode="grayscale"] ::selection { background: #dedede; color: #171717; }
+main { overflow-wrap: anywhere; }
+main:focus { outline: none; }
+@media (forced-colors: active) {
+  :root :is(:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible) { outline-color: Highlight !important; }
+  .btn-primary, .btn-secondary { border: 1px solid ButtonText; }
 }

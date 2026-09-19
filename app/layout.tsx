@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { AccessibilitySettings } from "@/components/accessibility-settings";
 import { profile, siteConfig } from "@/data/profile";
 
 const geistSans = Geist({
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <div id="top" className="min-h-screen bg-white text-slate-900">
           <a href="#main-content" className="skip-link">Skip to content</a>
           <Navbar />
+          <AccessibilitySettings />
           {children}
           <Footer />
         </div>

@@ -9,7 +9,7 @@ export default function ProjectPage() {
   const data = projectCaseStudies["valencias-restaurant"];
 
   return (
-    <main id="main-content" className="mx-auto max-w-5xl px-5 py-16 sm:px-6 lg:px-8">
+    <main id="main-content" tabIndex={-1} className="mx-auto max-w-5xl px-5 py-16 sm:px-6 lg:px-8">
       <Link href="/" className="inline-flex items-center gap-2 text-sm text-blue-700 hover:text-blue-800">
         <ArrowLeft size={16} /> Back to portfolio
       </Link>

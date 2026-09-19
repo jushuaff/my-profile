@@ -13,6 +13,7 @@ import { ProjectPreview } from "@/components/project-preview";
 import { SkillsSection } from "@/components/skills-section";
 import { CareerSections } from "@/components/career-sections";
 import { WhyWorkWithMe } from "@/components/why-work-with-me";
+import { ScrollEffects } from "@/components/scroll-effects";
 
 const processSteps = [
   { number: "01", title: "Understand", description: "We define the goal, users, features, and project scope." },
@@ -25,7 +26,8 @@ const processSteps = [
 
 export default function Home() {
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1} className="portfolio-effects">
+      <ScrollEffects />
       <section className="portfolio-hero mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.35fr_0.85fr] lg:gap-16">
           <div>
@@ -49,7 +51,7 @@ export default function Home() {
 
         <div className="mt-12 space-y-8">
           {projects.map((project, index) => (
-            <article key={project.slug} className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white">
+            <article key={project.slug} className="effect-card effect-reveal overflow-hidden rounded-[2rem] border border-slate-200 bg-white">
               <div className="grid gap-6 p-5 md:p-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
                 <div className={`${index % 2 === 1 ? "lg:order-2" : ""}`}>
                   <ProjectPreview src={project.image} title={project.title} />
@@ -99,7 +101,7 @@ export default function Home() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {services.map((service) => (
-            <div key={service.title} className="rounded-[1.75rem] border border-slate-200 bg-white p-7">
+            <div key={service.title} className="effect-card effect-reveal rounded-[1.75rem] border border-slate-200 bg-white p-7">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">Starting from</p>
               <p className="mt-4 text-3xl font-semibold text-slate-900">{service.price}</p>
               <h3 className="mt-6 text-2xl font-semibold text-slate-900">{service.title}</h3>
@@ -135,7 +137,7 @@ export default function Home() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {processSteps.map((step) => (
-            <div key={step.number} className="rounded-[1.5rem] border border-slate-200 bg-white p-6">
+            <div key={step.number} className="effect-card effect-reveal rounded-[1.5rem] border border-slate-200 bg-white p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-700">{step.number}</p>
               <h3 className="mt-5 text-2xl font-semibold text-slate-900">{step.title}</h3>
               <p className="mt-4 text-base leading-7 text-slate-600">{step.description}</p>

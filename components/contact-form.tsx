@@ -61,7 +61,8 @@ export function ContactForm() {
   };
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
+    <form className="space-y-5" onSubmit={handleSubmit} aria-label="Project inquiry" aria-describedby="contact-instructions">
+      <p id="contact-instructions" className="text-sm text-slate-600">All fields are required unless marked optional. Enter at least 2 characters for your name and 10 characters for your message.</p>
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block text-sm text-slate-700">
           <span className="mb-2 block">Name</span>
@@ -98,6 +99,7 @@ export function ContactForm() {
         <input
           type="text"
           name="company"
+          autoComplete="organization"
           value={form.company}
           onChange={handleChange}
           className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-slate-900 outline-none transition focus:border-blue-500"
@@ -170,15 +172,13 @@ export function ContactForm() {
         </a>
       </p>
 
-      {status === "success" && (
-        <p role="status" className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2 text-sm text-emerald-800">
-          Your inquiry has been sent successfully.
-        </p>
-      )}
+      <p role="status" aria-atomic="true" className="text-sm text-emerald-800">
+        {status === "loading" ? "Sending your inquiry. Please wait." : status === "success" ? "Success: Your inquiry has been sent successfully." : ""}
+      </p>
 
       {status === "error" && (
         <p role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-800">
-          {error}
+          <strong>Unable to send: </strong>{error}
         </p>
       )}
     </form>
